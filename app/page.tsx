@@ -7,6 +7,7 @@ import Chatbot from "./chatbox/chat";
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(true);
+  const [isChatOpenText, setIsChatOpenText] = useState("");
 
   const toggleChatOpen = () => {
     setIsChatOpen(!isChatOpen);
@@ -22,9 +23,11 @@ export default function Home() {
         // layout="intrinsic"
         quality={100}
         // priority
+        // objectFit="cover"
+        // className="absolute inset-0 z-0"
       />
-      <div className="fix">
-        <div className="relative">
+      <div className={`fix`}>
+        <div className={`relative ${isChatOpen ? "" : ""} duration-300`}>
           <FloatingButton onClick={toggleChatOpen} />
           <Chatbot isOpen={isChatOpen} toggleOpen={toggleChatOpen} />
         </div>
