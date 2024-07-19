@@ -27,8 +27,8 @@ export default function Home() {
         // className="absolute inset-0 z-0"
       />
       <div className={`fix`}>
-        <div className={`relative ${isChatOpen ? "" : ""} duration-300`}>
-          <FloatingButton onClick={toggleChatOpen} />
+        <div className={`relative right-4 duration-300`}>
+          <FloatingButton isOpen={isChatOpen} onClick={toggleChatOpen} />
           <Chatbot isOpen={isChatOpen} toggleOpen={toggleChatOpen} />
         </div>
       </div>
