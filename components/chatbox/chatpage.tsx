@@ -2,7 +2,7 @@
 import Bubble from '@/components/bubble';
 import React, { useEffect, useState } from 'react';
 import ButtonPrimary from '../button/buttonPrimary';
-import ChatSidebar from './sidebar';
+
 
 interface ChatPageProps {
   isOpen: boolean;
@@ -13,7 +13,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
   const hello = "Welcome to Big C AI, your personal shopping assistant 🐻";
   const promptTutorial = [
     "มีโปรโมชั่นใดแนะนำบ้าง",
-    "ฉันต้องการจัดงานวันเกิดลูกสาวอายุ 5 ขวบ แนะนำสินค้าใดบ้าง",
+    "แนะนำสินค้าสำหรับการจัดงานวันเกิดลูกสาวอายุ 5 ขวบ",
     "10 อันดับสินค้าขายดีในเดือนนี้",
     "ติดตามสถานะคำสั่งซื้อของฉัน",
   ]
@@ -64,7 +64,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
   }, [isFirstEnter])
 
   return (
-    <div className={`fixed bottom-0 flex flex-col w-[92vw] h-full bg-gray-300 text-black border border-gray-300 rounded-lg shadow-xl duration-300 right-0 ${isOpen ? '' : 'translate-x-[100%]'}`}>
+    <div className={`fixed bottom-0 flex flex-col w-full h-[90vh] md:w-[92vw] md:h-full bg-gray-300 text-black border border-gray-300 rounded-lg shadow-xl duration-300 right-0 ${isOpen ? '' : 'translate-y-[100%] md:translate-x-[100%] md:translate-y-0'}`}>
       {/* <div className="flex justify-between items-center w-full px-4 py-2 border-b-1 border-gray-300">
         <button
           className="text-gray-500 hover:text-red-700 text-2xl"
@@ -74,30 +74,30 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
         </button>
       </div> */}
       <div className="flex h-full">
-        <ChatSidebar/>
+        {/* <ChatSidebar/> */}
         {isFirstEnter ? (
           <div className="flex flex-col justify-between w-full h-full overflow-y-auto">
             <div className="p-4">
               <h1 className="pt-4 w-full text-2xl text-center font-bold">{hello}</h1>
               <h2 className="pt-4 w-full text-xl text-center">บริการแชทบอต AI เพื่อช่วยตอบคำถามด้านการใช้งานหรือเลือกซื้อสินค้าของท่าน</h2>
               
-              <div className="flex w-full justify-center mt-16 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 w-full justify-center mt-8 md:mt-16 gap-3 md:gap-8">
                 {promptTutorial.map((prompt, idx) => {
                   return (
                     // <PromptBox key={`prompt-box-${idx}`} text={prompt} image=""/>
                     <button
-                      className={`w-36 h-36 p-4 text-left border border-black rounded-xl duration-300 hover:bg-gray-200`}
-                      key={`prompt-box-${idx}`}
+                    className="aspect-square w-full p-4 text-left border border-black rounded-xl duration-300 hover:bg-gray-200"
+                    key={`prompt-box-${idx}`}
                       onClick={() => handleSelectPrompt(prompt)}
                     >
                       {prompt}
                     </button>
                   )
                 })}
-                </div>
+              </div>
             </div>
 
-            <div className="flex items-center w-full border-t px-4 py-2">
+            <div className="flex items-center w-full border-t px-2 md:px-4 py-2">
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -112,7 +112,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
         ) : (
           <div className="flex flex-col justify-between w-full h-full overflow-y-auto">
             <div className="p-4">
-              <div className={`w-fit max-w-full px-4 py-2 rounded-xl bg-white text-black mr-auto}`}>
+              <div className={`w-fit max-w-full mb-2 px-4 py-2 rounded-xl bg-white text-black mr-auto}`}>
                 {hello}
               </div>
               <div className="flex flex-col space-y-2">
@@ -122,7 +122,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
               </div>
             </div>
             
-            <div className="flex items-center w-full border-t px-4 py-2 bg-gray-300">
+            <div className="flex items-center w-full border-t px-2 md:px-4 py-2 bg-gray-300">
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
