@@ -10,8 +10,8 @@ interface BubbleProps {
 const Bubble: React.FC<BubbleProps> = ({ key, text, isBot }) => {
   return (
     <div
-      className={`w-fit max-w-80 px-4 py-2 rounded-xl text-ellipsis overflow-hidden ${
-        isBot ? 'bg-white text-black mr-auto' : 'bg-green-500 text-white ml-auto'
+      className={`w-fit md:max-w-80 px-4 py-2 rounded-xl text-ellipsis overflow-hidden ${
+        isBot ? 'bg-gray-100 text-black mr-auto' : 'bg-[#93d600] text-white ml-auto'
       }`}
       key={key}
     >

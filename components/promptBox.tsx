@@ -2,18 +2,20 @@ import Image from 'next/image';
 import React from 'react';
 
 interface PromptBoxProps {
-  key: string;
+  key: number;
   text: string;
-  image: string;
+  image?: string | "";
+  onClick: () => void;
 }
 
-const PromptBox: React.FC<PromptBoxProps> = ({ key, text, image }) => {
+const PromptBox: React.FC<PromptBoxProps> = ({ key, text, image, onClick }) => {
   return (
     <button
-      className={`w-36 h-36 p-4 border border-black rounded-xl duration-300 hover:bg-gray-200`}
-      key={key}
+      className="aspect-square w-full p-4 text-left border border-black rounded-xl duration-300 hover:bg-gray-200"
+      key={`prompt-box-${key}`}
+      onClick={onClick}
     >
-      <Image src={image} alt={image}/>
+      {image && (<Image src={image} alt={image}/>)}
       {text}
     </button>
   );

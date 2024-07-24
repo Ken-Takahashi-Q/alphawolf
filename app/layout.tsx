@@ -17,7 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="th">
+      <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" />
       <body className={noto.className}>{children}</body>
     </html>
   );

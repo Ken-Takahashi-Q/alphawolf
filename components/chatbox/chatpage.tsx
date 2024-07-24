@@ -1,7 +1,14 @@
 "use client"
 import Bubble from '@/components/bubble';
-import React, { useEffect, useState } from 'react';
-import ButtonPrimary from '../button/buttonPrimary';
+import { setIsChatOpen } from '@/redux/reducers/globalReducer';
+import { setMessage, setMessages } from '@/redux/reducers/messagesReducer';
+import { RootState } from '@/redux/store/reducers';
+import { hello, promptTutorial } from '@/utils/global';
+import { Modal } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PromptBox from '../promptBox';
+import MessageBox from './message_box';
 
 
 interface ChatPageProps {
@@ -10,133 +17,105 @@ interface ChatPageProps {
 }
 
 const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
-  const hello = "Welcome to Big C AI, your personal shopping assistant 🐻";
-  const promptTutorial = [
-    "มีโปรโมชั่นใดแนะนำบ้าง",
-    "แนะนำสินค้าสำหรับการจัดงานวันเกิดลูกสาวอายุ 5 ขวบ",
-    "10 อันดับสินค้าขายดีในเดือนนี้",
-    "ติดตามสถานะคำสั่งซื้อของฉัน",
-  ]
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<{ text: string; isBot: boolean }[]>([]);
+  const dispatch = useDispatch();
+
+  const toggleChatClose = () => {
+    dispatch(setIsChatOpen(false));
+  };
+  
   const [botIndex, setBotIndex] = useState(0);
   const botMessages = [
     "บีเจซีบิ๊กซีสวัสดีค่ะ คุณต้องการความช่วยเหลือด้านใด",
     "กรุณารอสักครู่",
   ];
-  const [isFirstEnter, setIsFirstEnter] = useState(true);
+  const [isShowTutorial, setIsShowTutorial] = useState(true);
+  const message = useSelector((state: RootState) => state.messages.message);
+  const messages = useSelector((state: RootState) => state.messages.messages);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const handleSendMessage = () => {
     if (message.trim()) {
-      setMessages([...messages, { text: message, isBot: false }]);
-      setMessage('');
-      setMessages(prevMessages => [
-        ...prevMessages,
-        { text: '', isBot: true },
-      ]);
-
-      setIsFirstEnter(false);
+      const userMessage = { text: message, isBot: false };
+      const placeholderMessage = { text: '', isBot: true };
+      const updatedMessages = [...messages, userMessage, placeholderMessage];
+      
+      dispatch(setMessages(updatedMessages));
+      dispatch(setMessage(""));
+      setIsShowTutorial(false);
+      
       setTimeout(() => {
         const botResponse = botMessages[botIndex % botMessages.length];
-        setMessages(prevMessages => [
-          ...prevMessages.slice(0, -1),
-          { text: botResponse, isBot: true },
-        ]);
+        const updatedMessagesWithBot = updatedMessages.map(msg => 
+          msg.text === '' ? { text: botResponse, isBot: true } : msg
+        );
+        dispatch(setMessages(updatedMessagesWithBot));
         setBotIndex(botIndex + 1);
-      }, 800);
+      }, 700);
     }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
+  };  
 
   const handleSelectPrompt = async (prompt: string) => {
-    setMessage(prompt);
-    setIsFirstEnter(false);
+    dispatch(setMessage(prompt));
+    setIsShowTutorial(false);
   }
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     handleSendMessage();
-  }, [isFirstEnter])
+  }, [isShowTutorial])
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
-    <div className={`fixed bottom-0 flex flex-col w-full h-[90vh] md:w-[92vw] md:h-full bg-gray-300 text-black border border-gray-300 rounded-lg shadow-xl duration-300 right-0 ${isOpen ? '' : 'translate-y-[100%] md:translate-x-[100%] md:translate-y-0'}`}>
-      {/* <div className="flex justify-between items-center w-full px-4 py-2 border-b-1 border-gray-300">
-        <button
-          className="text-gray-500 hover:text-red-700 text-2xl"
-          onClick={toggleOpen}
-        >
-          ×
-        </button>
-      </div> */}
-      <div className="flex h-full">
-        {/* <ChatSidebar/> */}
-        {isFirstEnter ? (
-          <div className="flex flex-col justify-between w-full h-full overflow-y-auto">
-            <div className="p-4">
-              <h1 className="pt-4 w-full text-2xl text-center font-bold">{hello}</h1>
-              <h2 className="pt-4 w-full text-xl text-center">บริการแชทบอต AI เพื่อช่วยตอบคำถามด้านการใช้งานหรือเลือกซื้อสินค้าของท่าน</h2>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 w-full justify-center mt-8 md:mt-16 gap-3 md:gap-8">
-                {promptTutorial.map((prompt, idx) => {
-                  return (
-                    // <PromptBox key={`prompt-box-${idx}`} text={prompt} image=""/>
-                    <button
-                    className="aspect-square w-full p-4 text-left border border-black rounded-xl duration-300 hover:bg-gray-200"
-                    key={`prompt-box-${idx}`}
-                      onClick={() => handleSelectPrompt(prompt)}
-                    >
-                      {prompt}
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
+    <Modal
+      open={isOpen}
+      onCancel={toggleChatClose}
+      title="Buddy AI"
+      centered
+      width="70%"
+      // height="90vh"
+      footer={[<MessageBox handleSendMessage={handleSendMessage}/>]}
+      style={{ fontFamily: 'Noto Sans Thai, sans-serif' }} 
+    >
+      <div className={`flex flex-col ${isShowTutorial ? "justify-center items-center" : "overflow-y-auto"} h-[70vh] p-4 overflow-x-hidden`}>
 
-            <div className="flex items-center w-full border-t px-2 md:px-4 py-2">
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type your message..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg max-h-24 overflow-auto"
-                rows={1}
-                onKeyDown={handleKeyDown}
-              />
-              <ButtonPrimary text="Send" onClick={handleSendMessage}/>
+        {isShowTutorial ? (
+          <div className="flex flex-col items-center">
+            <h1 className="w-full text-2xl text-center font-bold">
+              {hello}
+            </h1>
+            <h2 className="pt-4 text-xl text-center">
+              บริการแชทบอต AI เพื่อช่วยตอบคำถามด้านการใช้งานหรือเลือกซื้อสินค้าของท่าน
+            </h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 justify-center w-full lg:w-[70%] mt-8 md:mt-16 px-4 gap-3">
+              {promptTutorial?.map((prompt, idx) => {
+                return (
+                  <PromptBox key={idx} text={prompt} onClick={() => handleSelectPrompt(prompt)}/>
+                )
+              })}
             </div>
           </div>
         ) : (
-          <div className="flex flex-col justify-between w-full h-full overflow-y-auto">
-            <div className="p-4">
-              <div className={`w-fit max-w-full mb-2 px-4 py-2 rounded-xl bg-white text-black mr-auto}`}>
-                {hello}
-              </div>
-              <div className="flex flex-col space-y-2">
-                {messages.map((msg, index) => (
-                  <Bubble key={`bubble-${index}`} text={msg.text} isBot={msg.isBot}/>
-                ))}
-              </div>
+          <>
+            <div className="flex flex-col space-y-2">
+              {messages.map((msg, index) => (
+                <Bubble key={`bubble-${index}`} text={msg.text} isBot={msg.isBot}/>
+              ))}
             </div>
             
-            <div className="flex items-center w-full border-t px-2 md:px-4 py-2 bg-gray-300">
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type your message..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg max-h-24 overflow-auto"
-                rows={1}
-                onKeyDown={handleKeyDown}
-              />
-              <ButtonPrimary text="Send" onClick={handleSendMessage}/>
-            </div>
-          </div>
+            <div ref={messagesEndRef} />
+          </>
         )}
       </div>
-    </div>
+    </Modal>
   );
 };
 
