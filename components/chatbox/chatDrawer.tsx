@@ -1,20 +1,21 @@
 "use client"
+import Bubble from '@/components/bubble';
 import { setIsChatOpen } from '@/redux/reducers/globalReducer';
 import { setMessage, setMessages } from '@/redux/reducers/messagesReducer';
 import { RootState } from '@/redux/store/reducers';
-import { Drawer, Modal } from 'antd';
+import { hello, promptTutorial } from '@/utils/global';
+import { Drawer, DrawerProps } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ChatPageContent from './chatPageContent';
-import MessageBox from './message_box';
+import PromptBox from '../promptBox';
 
 
-interface ChatPageProps {
+interface ChatDrawerProps {
   isOpen: boolean;
   toggleOpen: () => void;
 }
 
-const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
+const ChatDrawer: React.FC<ChatDrawerProps> = ({ isOpen, toggleOpen }) => {
   const dispatch = useDispatch();
 
   const toggleChatClose = () => {
@@ -71,40 +72,60 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
     scrollToBottom();
   }, [messages]);
 
-  return (
-    <div>
-      <div className="hidden md:block">
-        <Modal
-          open={isOpen}
-          onCancel={toggleChatClose}
-          title="Buddy AI"
-          centered
-          width="70%"
-          // height="90vh"
-          footer={[<MessageBox handleSendMessage={handleSendMessage}/>]}
-          style={{ fontFamily: 'Noto Sans Thai, sans-serif' }}
-        >
-          <ChatPageContent/>
-        </Modal>
-      </div>
+  const [open, setOpen] = useState(false);
+  const [placement, setPlacement] = useState<DrawerProps['placement']>('bottom');
 
-      <div className="block md:hidden">
-        <Drawer
-          open={isOpen}
-          placement="bottom"
-          closable={true}
-          onClose={toggleChatClose}
-          title="Buddy AI"
-          style={{ fontFamily: 'Noto Sans Thai, sans-serif' }} 
-          className="block md:hidden"
-          height={"90vh"}
-          footer={[<MessageBox handleSendMessage={handleSendMessage}/>]}
-        >
-          <ChatPageContent/>
-        </Drawer>
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Drawer
+      open={isOpen}
+      placement="bottom"
+      closable={true}
+      onClose={toggleChatClose}
+      title="Buddy AI"
+      // height="90vh"
+      style={{ fontFamily: 'Noto Sans Thai, sans-serif' }} 
+    >
+      <div className={`flex flex-col ${isShowTutorial ? "justify-center items-center" : "overflow-y-auto"} h-[70vh] p-4 overflow-x-hidden`}>
+
+        {isShowTutorial ? (
+          <div className="flex flex-col items-center">
+            <h1 className="w-full text-2xl text-center font-bold">
+              {hello}
+            </h1>
+            <h2 className="pt-4 text-xl text-center">
+              บริการแชทบอต AI เพื่อช่วยตอบคำถามด้านการใช้งานหรือเลือกซื้อสินค้าของท่าน
+            </h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 justify-center w-full lg:w-[70%] mt-8 md:mt-16 px-4 gap-3">
+              {promptTutorial?.map((prompt, idx) => {
+                return (
+                  <PromptBox key={idx} text={prompt} onClick={() => handleSelectPrompt(prompt)}/>
+                )
+              })}
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-col space-y-2">
+              {messages.map((msg, index) => (
+                <Bubble key={`bubble-${index}`} text={msg.text} isBot={msg.isBot}/>
+              ))}
+            </div>
+            
+            <div ref={messagesEndRef} />
+          </>
+        )}
       </div>
-    </div>
+    </Drawer>
   );
 };
 
-export default ChatPage;
+export default ChatDrawer;
