@@ -66,8 +66,7 @@ const ChatPageContent: React.FC = () => {
   }, [messages]);
 
   return (
-    <div className={`flex flex-col ${isShowTutorial ? "justify-center items-center" : "overflow-y-auto"} h-[70vh] p-4 overflow-x-hidden`}>
-
+    <div className={`flex flex-col ${isShowTutorial ? "justify-center items-center" : "overflow-y-auto"} h-[70vh] p-2 md:p-4 overflow-x-hidden`}>
       {isShowTutorial ? (
         <div className="flex flex-col items-center">
           <h1 className="w-full text-2xl text-center font-bold">

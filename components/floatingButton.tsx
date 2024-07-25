@@ -9,7 +9,7 @@ interface FloatingButtonProps {
 
 const FloatingButton: React.FC<FloatingButtonProps> = ({ isOpen, onClick }) => {
   return (
-    <div className="group fixed bottom-24 md:bottom-4 right-4 transform transition-transform duration-300">
+    <div className="group fixed bottom-16 md:bottom-4 right-4 transform transition-transform duration-300">
       {/* <button
         // ${isOpen ? '-translate-y-[79vh] md:translate-y-0 md:-translate-x-[92vw]' : 'translate-x-0'}
         className={`transform transition-transform duration-300

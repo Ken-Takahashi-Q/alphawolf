@@ -5,7 +5,8 @@ import { RootState } from "@/redux/store/reducers";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import ChatPage from "../components/chatbox/chatpage";
-import homepageAppImage from "../public/homepage-app.png";
+import homepageAppMenuImage from "../public/homepage-app-menu.jpg";
+import homepageAppImage from "../public/homepage-app.jpg";
 import homepageImage from "../public/homepage.png";
 import { setIsChatOpen } from "../redux/reducers/globalReducer";
 
@@ -18,7 +19,7 @@ export default function Home() {
   };
 
   return (
-    <main className={`flex min-h-screen flex-col bg-white`}>
+    <main className={`flex min-h-screen flex-col bg-white overflow-hidden`}>
       <Image
         className="hidden md:block"
         src={homepageImage} 
@@ -35,6 +36,15 @@ export default function Home() {
         width={homepageAppImage.width}
         height={homepageAppImage.height}
         quality={100}
+        className="md:hidden -translate-y-[48px]"
+      />
+      <Image
+        src={homepageAppMenuImage} 
+        alt="homepageAppMenuImage"
+        width={homepageAppMenuImage.width}
+        height={homepageAppMenuImage.height}
+        quality={100}
+        className="fixed md:hidden bottom-0"
       />
 
       <SpeechBox/>

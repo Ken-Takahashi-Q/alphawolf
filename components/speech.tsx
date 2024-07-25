@@ -19,7 +19,7 @@ const SpeechBox = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 w-40 md:h-13 p-2 rounded bg-yellow-100 text-black text-sm shadow-xl -translate-y-20">
+    <div className="fixed bottom-4 right-4 w-40 md:h-13 p-2 rounded bg-yellow-100 text-black text-sm shadow-xl -translate-y-32 md:-translate-y-20">
       {displayText}
       <div className="fixed right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent
       border-t-8 border-t-yellow-100 translate-y-2">
