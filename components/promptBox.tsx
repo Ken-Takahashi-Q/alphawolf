@@ -11,7 +11,7 @@ interface PromptBoxProps {
 const PromptBox: React.FC<PromptBoxProps> = ({ key, text, image, onClick }) => {
   return (
     <button
-      className="aspect-square w-full p-4 text-left border border-black rounded-xl duration-300 hover:bg-gray-200"
+      className="aspect-square max-w-40 p-4 text-left border border-black rounded-xl duration-300 hover:bg-gray-200"
       key={`prompt-box-${key}`}
       onClick={onClick}
     >

@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th">
-      <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" />
+      <head>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" />
+      </head>
       <body className={noto.className}>{children}</body>
     </html>
   );

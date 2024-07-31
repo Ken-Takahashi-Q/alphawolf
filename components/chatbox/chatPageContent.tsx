@@ -1,26 +1,22 @@
 "use client"
 import Bubble from '@/components/bubble';
-import { setIsChatOpen } from '@/redux/reducers/globalReducer';
-import { setMessage, setMessages } from '@/redux/reducers/messagesReducer';
+import { setIsShowTutorial, setMessage, setMessages } from '@/redux/reducers/messagesReducer';
 import { RootState } from '@/redux/store/reducers';
 import { hello, promptTutorial } from '@/utils/global';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PromptBox from '../promptBox';
+import DeleteChatConfirm from '../warning/deleteChat';
 
 const ChatPageContent: React.FC = () => {
   const dispatch = useDispatch();
 
-  const toggleChatClose = () => {
-    dispatch(setIsChatOpen(false));
-  };
-  
   const [botIndex, setBotIndex] = useState(0);
   const botMessages = [
     "บีเจซีบิ๊กซีสวัสดีค่ะ คุณต้องการความช่วยเหลือด้านใด",
     "กรุณารอสักครู่",
   ];
-  const [isShowTutorial, setIsShowTutorial] = useState(true);
+  const isShowTutorial = useSelector((state: RootState) => state.messages.isShowTutorial);
   const message = useSelector((state: RootState) => state.messages.message);
   const messages = useSelector((state: RootState) => state.messages.messages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -48,7 +44,7 @@ const ChatPageContent: React.FC = () => {
 
   const handleSelectPrompt = async (prompt: string) => {
     dispatch(setMessage(prompt));
-    setIsShowTutorial(false);
+    dispatch(setIsShowTutorial(false));
   }
 
   const scrollToBottom = () => {
@@ -66,17 +62,17 @@ const ChatPageContent: React.FC = () => {
   }, [messages]);
 
   return (
-    <div className={`flex flex-col ${isShowTutorial ? "justify-center items-center" : "overflow-y-auto"} h-[70vh] p-2 md:p-4 overflow-x-hidden`}>
+    <div className={`flex flex-col ${isShowTutorial ? "justify-center items-center" : "overflow-y-auto"} md:h-[70vh] md:p-4 overflow-x-hidden`}>
       {isShowTutorial ? (
         <div className="flex flex-col items-center">
           <h1 className="w-full text-2xl text-center font-bold">
             {hello}
           </h1>
-          <h2 className="pt-4 text-xl text-center">
+          <h2 className="md:pt-2 text-xl text-center">
             บริการแชทบอต AI เพื่อช่วยตอบคำถามด้านการใช้งานหรือเลือกซื้อสินค้าของท่าน
           </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 justify-center w-full lg:w-[70%] mt-8 md:mt-16 px-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 justify-center w-full mt-2 md:mt-8 md:mt-16 px-4 gap-3">
             {promptTutorial?.map((prompt, idx) => {
               return (
                 <PromptBox key={idx} text={prompt} onClick={() => handleSelectPrompt(prompt)}/>
@@ -95,6 +91,9 @@ const ChatPageContent: React.FC = () => {
           <div ref={messagesEndRef} />
         </>
       )}
+
+      
+      <DeleteChatConfirm/>
     </div>
   );
 };

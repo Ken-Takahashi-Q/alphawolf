@@ -7,11 +7,13 @@ interface Message {
 }
 
 interface MessagesState {
+  isShowTutorial: boolean;
   message: string;
   messages: Message[];
 }
 
 const initialState: MessagesState = {
+  isShowTutorial: true,
   message: "",
   messages: [
     {
@@ -25,6 +27,9 @@ const messagesSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
+    setIsShowTutorial: (state, action: PayloadAction<boolean>) => {
+      state.isShowTutorial = action.payload;
+    },
     setMessage: (state, action: PayloadAction<string>) => {
       state.message = action.payload;
     },
@@ -34,5 +39,5 @@ const messagesSlice = createSlice({
   }
 });
 
-export const { setMessage, setMessages } = messagesSlice.actions;
+export const { setIsShowTutorial, setMessage, setMessages } = messagesSlice.actions;
 export default messagesSlice.reducer;

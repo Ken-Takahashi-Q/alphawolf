@@ -1,8 +1,9 @@
 "use client"
 import { setIsChatOpen } from '@/redux/reducers/globalReducer';
-import { setMessage, setMessages } from '@/redux/reducers/messagesReducer';
+import { setIsShowTutorial, setMessage, setMessages } from '@/redux/reducers/messagesReducer';
 import { RootState } from '@/redux/store/reducers';
 import { useIsSmallScreen } from '@/utils/isSmallScreen';
+import { DownOutlined } from '@ant-design/icons';
 import { Drawer, Modal } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,8 +28,8 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
     "บีเจซีบิ๊กซีสวัสดีค่ะ คุณต้องการความช่วยเหลือด้านใด",
     "กรุณารอสักครู่",
   ];
-  const [isShowTutorial, setIsShowTutorial] = useState(true);
-  // const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  const isShowTutorial = useSelector((state: RootState) => state.messages.isShowTutorial);
   const message = useSelector((state: RootState) => state.messages.message);
   const messages = useSelector((state: RootState) => state.messages.messages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -39,9 +40,9 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
       const placeholderMessage = { text: '', isBot: true };
       const updatedMessages = [...messages, userMessage, placeholderMessage];
       
-      dispatch(setMessages(updatedMessages));
+      dispatch(setIsShowTutorial(false));
       dispatch(setMessage(""));
-      setIsShowTutorial(false);
+      dispatch(setMessages(updatedMessages));
       
       setTimeout(() => {
         const botResponse = botMessages[botIndex % botMessages.length];
@@ -89,10 +90,11 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen, toggleOpen }) => {
         <Drawer
           open={isOpen}
           placement="bottom"
+          title="Buddy AI"
           closable={true}
           onClose={toggleChatClose}
-          title="Buddy AI"
-          height={"90vh"}
+          closeIcon={<DownOutlined />}
+          height={"70%"}
           footer={[<MessageBox handleSendMessage={handleSendMessage} />]}
           style={{ fontFamily: 'Noto Sans Thai, sans-serif' }}
         >

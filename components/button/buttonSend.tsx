@@ -1,12 +1,12 @@
 import { SendOutlined } from '@ant-design/icons';
 import React from 'react';
 
-interface ButtonPrimaryProps {
+interface ButtonSendProps {
   text: string;
   onClick: () => void;
 }
 
-const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ text, onClick }) => {
+const ButtonSend: React.FC<ButtonSendProps> = ({ text, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -19,4 +19,4 @@ const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ text, onClick }) => {
   );
 };
 
-export default ButtonPrimary;
+export default ButtonSend;
