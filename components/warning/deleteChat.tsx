@@ -10,17 +10,19 @@ import ButtonWarning from '../button/buttonWarning';
 const DeleteChatConfirm: React.FC = () => {
   const dispatch = useDispatch();
 
-  const isShowDeleteChatConfirm = useSelector((state: RootState) => state.globalState.isShowDeleteChatConfirm);
+  const isShowDeleteChatConfirm = useSelector(
+    (state: RootState) => state.globalState.isShowDeleteChatConfirm,
+  );
 
   const cancelDeleteChat = () => {
-    dispatch(setIsShowDeleteChatConfirm(false))
-  }
+    dispatch(setIsShowDeleteChatConfirm(false));
+  };
 
   const confirmDeleteChat = () => {
-    dispatch(setIsShowDeleteChatConfirm(false))
-    dispatch(setIsShowTutorial(true))
-    dispatch(setMessages([]))
-  }
+    dispatch(setIsShowDeleteChatConfirm(false));
+    dispatch(setIsShowTutorial(true));
+    dispatch(setMessages([{ isBot: true, text: 'first', code: 0 }]));
+  };
 
   return (
     <Modal
@@ -28,12 +30,12 @@ const DeleteChatConfirm: React.FC = () => {
       title="ยืนยันลบประวัติการแชท"
       // onOk={handleOk}
       onCancel={() => dispatch(setIsShowDeleteChatConfirm(false))}
-      footer={ (
+      footer={
         <Flex justify="flex-end" align="flex-end" gap="small">
-          <ButtonSecondary text="ยกเลิก" onClick={cancelDeleteChat}/>
-          <ButtonWarning text="ยืนยัน" onClick={confirmDeleteChat}/>
+          <ButtonSecondary text="ยกเลิก" onClick={cancelDeleteChat} />
+          <ButtonWarning text="ยืนยัน" onClick={confirmDeleteChat} />
         </Flex>
-      )}
+      }
       centered
     />
   );

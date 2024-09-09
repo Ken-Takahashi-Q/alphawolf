@@ -1,25 +1,34 @@
 import { Spin } from 'antd';
-import React from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 interface BubbleProps {
-  key: string;
-  text: string;
+  bubbleKey: number;
   isBot: boolean;
+  children: ReactNode;
 }
 
-const Bubble: React.FC<BubbleProps> = ({ key, text, isBot }) => {
+const Bubble: React.FC<BubbleProps> = ({ bubbleKey, isBot, children }) => {
+  const [showContent, setShowContent] = useState(!isBot);
+
+  useEffect(() => {
+    if (isBot && bubbleKey > 1) {
+      const timer = setTimeout(() => {
+        setShowContent(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowContent(true);
+    }
+  }, [isBot]);
+
   return (
     <div
-      className={`w-fit max-w-[80%] md:max-w-80 px-4 py-2 rounded-xl text-ellipsis overflow-hidden ${
-        isBot ? 'bg-gray-100 text-black mr-auto' : 'bg-[#93d600] text-white ml-auto'
+      className={`w-fit max-w-[80%] overflow-hidden text-ellipsis rounded-xl px-4 py-2 md:max-w-80 ${
+        isBot ? 'mr-auto bg-gray-100 text-black' : 'ml-auto bg-[#93d600] text-white'
       }`}
-      key={key}
+      key={bubbleKey}
     >
-      {text === '' ? (
-        <Spin/>
-      ) : (
-        text
-      )}
+      {isBot && !showContent ? <Spin /> : children}
     </div>
   );
 };

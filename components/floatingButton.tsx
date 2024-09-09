@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import buddyIcon from "../public/buddy.png";
+import buddyIcon from '../public/buddy.png';
 
 interface FloatingButtonProps {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface FloatingButtonProps {
 
 const FloatingButton: React.FC<FloatingButtonProps> = ({ isOpen, onClick }) => {
   return (
-    <div className="group fixed bottom-16 md:bottom-4 right-4 transform transition-transform duration-300">
+    <div className="group fixed bottom-16 right-4 transform transition-transform duration-300 md:bottom-4">
       {/* <button
         // ${isOpen ? '-translate-y-[79vh] md:translate-y-0 md:-translate-x-[92vw]' : 'translate-x-0'}
         className={`transform transition-transform duration-300
@@ -19,13 +19,13 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ isOpen, onClick }) => {
         onClick={onClick}
       > */}
       <button
-        className={`p-2 rounded-full bg-[#fddb02] ${
-          isOpen ? '' : 'group-hover:animate-none animate-bounceTwice'
+        className={`rounded-full bg-[#fddb02] p-2 ${
+          isOpen ? '' : 'animate-bounceTwice group-hover:animate-none'
         }`}
         onClick={onClick}
       >
-        {/* {isOpen ? '🏠' : 'Chat with Buddy AI 🐻'} */}
-        <Image src={buddyIcon} alt="buddy icon" width={48} height={48}/>
+        {/* {isOpen ? '🏠' : 'Chat with BearBuddy AI 🐻'} */}
+        <Image src={buddyIcon} alt="buddy icon" width={48} height={48} />
       </button>
     </div>
   );

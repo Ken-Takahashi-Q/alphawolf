@@ -1,14 +1,14 @@
-"use client"
-import FloatingButton from "@/components/floatingButton";
-import SpeechBox from "@/components/speech";
-import { RootState } from "@/redux/store/reducers";
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import ChatPage from "../components/chatbox/chatpage";
-import homepageAppMenuImage from "../public/homepage-app-menu.jpg";
-import homepageAppImage from "../public/homepage-app.jpg";
-import homepageImage from "../public/homepage.png";
-import { setIsChatOpen } from "../redux/reducers/globalReducer";
+'use client';
+import FloatingButton from '@/components/floatingButton';
+import SpeechBox from '@/components/speech';
+import { RootState } from '@/redux/store/reducers';
+import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import ChatPage from '../components/chatbox/chatpage';
+import homepageAppMenuImage from '../public/homepage-app-menu.jpg';
+import homepageAppImage from '../public/homepage-app.jpg';
+import homepageImage from '../public/homepage.png';
+import { setIsChatOpen } from '@/redux/reducers/globalReducer';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -19,10 +19,10 @@ export default function Home() {
   };
 
   return (
-    <main className={`flex min-h-screen flex-col bg-white overflow-hidden`}>
+    <main className={`flex min-h-screen flex-col overflow-hidden bg-white`}>
       <Image
         className="hidden md:block"
-        src={homepageImage} 
+        src={homepageImage}
         alt="homepage"
         width={homepageImage.width}
         height={homepageImage.height}
@@ -31,23 +31,23 @@ export default function Home() {
 
       {/* Mobile  Homepage */}
       <Image
-        src={homepageAppImage} 
+        src={homepageAppImage}
         alt="homepageAppImage"
         width={homepageAppImage.width}
         height={homepageAppImage.height}
         quality={100}
-        className="md:hidden -translate-y-[48px]"
+        className="-translate-y-[48px] md:hidden"
       />
       <Image
-        src={homepageAppMenuImage} 
+        src={homepageAppMenuImage}
         alt="homepageAppMenuImage"
         width={homepageAppMenuImage.width}
         height={homepageAppMenuImage.height}
         quality={100}
-        className="fixed md:hidden bottom-0"
+        className="fixed bottom-0 md:hidden"
       />
 
-      <SpeechBox/>
+      <SpeechBox />
       <FloatingButton isOpen={isChatOpen} onClick={toggleChatOpen} />
       <ChatPage isOpen={isChatOpen} toggleOpen={toggleChatOpen} />
     </main>
