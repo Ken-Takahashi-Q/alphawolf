@@ -345,8 +345,9 @@ export const botMessages = (index: number) => {
           <ol className="list-number ml-4">
             <li>กรณีเลือกชำระเงินปลายทาง (Pay on delivery) ประกอบด้วย</li>
             <ul className="ml-4 list-disc">
-              <li>กดลืมรหัสผ่า</li>
-              <li>กดลืมรหัสผ่า</li>
+              <li>ชำระเงินสดปลายทาง</li>
+              <li>ชำระบัตรเครดิต ปลายทาง</li>
+              <li>ชำระพร้อมเพย์ ปลายทาง</li>
             </ul>
 
             <li>กรณีเลือกชำระเงินออนไลน์ (Online payment) ประกอบด้วย</li>
