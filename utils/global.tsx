@@ -436,3 +436,32 @@ export const userMessages = (index: number) => {
       return <></>;
   }
 };
+
+export const handleSelectBot = (text: string) => {
+  if (/ขอ\s?(สินค้า)?\s?5\s?(อย่าง)?/.test(text)) {
+    return 3;
+  } else if (/แนะนำ\s?(สินค้า)?\s?ขายดี/.test(text)) {
+    return 1;
+  } else if (/อยาก\s?(ซื้อ)?\s?อาหาร\s?(แมว)?/.test(text)) {
+    return 2;
+  } else if (/โหลด/.test(text)) {
+    return 4;
+  } else if (/สมัคร\s?(สมาชิก)?/.test(text)) {
+    return 5;
+  } else if (/ลืม\s?(รหัสผ่าน)?/.test(text)) {
+    return 6;
+  } else if (/OTP\s?ผิด/.test(text)) {
+    return 7;
+  } else if (/วิธีการ\s?(ชำระเงิน)?/.test(text)) {
+    return 8;
+  } else if (/พร้อม\s?(จัดส่ง)?/.test(text)) {
+    return 9;
+  } else if (/ต้องการ\s?(เปลี่ยน)?\s?สินค้า/.test(text)) {
+    return 10;
+  } else if (/ใบ\s?(กำกับ)?\s?ภาษี/.test(text)) {
+    return 11;
+  } else if (/เป็น\s?สมาชิก.*อยู่แล้ว/.test(text)) {
+    return 12;
+  } else {
+  }
+};
