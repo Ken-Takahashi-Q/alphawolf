@@ -1,4 +1,7 @@
+import { setCart, setIsAddToCart } from '@/redux/reducers/globalReducer';
+import { RootState } from '@/redux/store/reducers';
 import { Button, Spin } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const chat_hello = `Welcome to BearBuddy AI`; //, your personal shopping assistant 🐻";
 
@@ -9,15 +12,25 @@ export const hello = `👋 บิ๊กซี สวัสดีครับ! �
 📦 เช็คสถานะคำสั่งซื้อ ของคุณได้ง่าย ๆ เพียงแค่คลิก!
 💳 มีปัญหาในการชำระเงิน หรือ การคืนสินค้า ให้ฉันช่วยได้เลยค่ะ!
 ✨ ใช้งานง่ายและรวดเร็ว ไม่ต้องห่วง! มาคุยกับฉันได้เลย แล้วคุณจะได้รับการแก้ปัญหาทันใจ 🛍️`;
+
 export const promptTutorial = [
   'มีโปรโมชั่นใดแนะนำบ้าง',
-  'แนะนำสินค้าสำหรับการจัดงานวันเกิดลูกสาวอายุ 5 ขวบ',
+  'แนะนำสินค้าสำหรับการจัดงานเลี้ยง',
   'แนะนำสินค้าขายดีในเดือนนี้',
   'ติดตามสถานะคำสั่งซื้อของฉัน',
 ];
 export const buddyHello = 'สวัสดีค่ะ มีอะไรให้น้อง Buddy ช่วยมั้ยคะ?';
 
 export const botMessages = (index: number) => {
+  const dispatch = useDispatch();
+
+  // const cart = useSelector((state: RootState) => state.globalState.cart);
+
+  const handleAddToCart = () => {
+    dispatch(setIsAddToCart(true));
+    // dispatch(setCart(cart + 1));
+  };
+
   switch (index) {
     case 0:
       return (
@@ -61,7 +74,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -83,7 +99,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -105,7 +124,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -188,7 +210,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -206,7 +231,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -224,7 +252,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -244,7 +275,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -264,7 +298,10 @@ export const botMessages = (index: number) => {
                     className="w-48 rounded-xl"
                   />
                 </a>
-                <button className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]">
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
                   + นำสินค้าเข้าตะกร้า
                 </button>
               </ul>
@@ -342,7 +379,7 @@ export const botMessages = (index: number) => {
             <strong>วิธีการชำระเงินแอป Big C มีกี่รูปแบบ อะไรบ้าง?</strong>
           </p>
           <p>วิธีการชำระเงินมี 2 รูปแบบหลัก คือ ชำระเงินปลายทาง และ ชำระเงินออนไลน์</p>
-          <ol className="list-number ml-4">
+          <ol className="ml-4 list-decimal">
             <li>กรณีเลือกชำระเงินปลายทาง (Pay on delivery) ประกอบด้วย</li>
             <ul className="ml-4 list-disc">
               <li>ชำระเงินสดปลายทาง</li>
@@ -419,6 +456,153 @@ export const botMessages = (index: number) => {
           <p>ไม่ต้องสมัครสมาชิกใหม่ สามารถใช้ข้อมูลสมาชิกเดิมลงชื่อเข้าใช้งานได้ทันที</p>
         </div>
       );
+    case 13:
+      return (
+        <div>
+          <p>🌟 โปรโมชั่นที่น่าสนใจในช่วงนี้! 🎉</p>
+          <ol className="mb-4 ml-4 list-decimal">
+            <li>
+              ซื้อครบ 129.- ลด 15.-
+              <ul className="ml-4 list-disc">
+                <li>
+                  <strong>รหัสส่วนลด</strong>: TIN15
+                </li>
+                <li>
+                  <strong>ระยะเวลา</strong>: 29 สิงหาคม - 18 กันยายน 2567
+                </li>
+                <li>
+                  <strong>รายละเอียด</strong>: เฉพาะลูกค้าบิ๊กพอยต์ ซื้อสินค้าผลิตภัณฑ์โอวัลติน
+                  ชนิดผง ชนิดยูเอชที ครบ 129 บาทขึ้นไป รับส่วนลด 15 บาท
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              ซื้อครบ 89.- ลด 10.-
+              <ul className="ml-4 list-disc">
+                <li>
+                  <strong>รหัสส่วนลด</strong>: TU10
+                </li>
+                <li>
+                  <strong>ระยะเวลา</strong>: 29 สิงหาคม - 18 กันยายน 2567
+                </li>
+                <li>
+                  <strong>รายละเอียด</strong>: เฉพาะลูกค้าบิ๊กพอยต์ ซื้อสินค้านอติลุส ครบ 89
+                  บาทขึ้นไป รับส่วนลด 10 บาท
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              ซื้อครบ 99.- ลด 20.-
+              <ul className="ml-4 list-disc">
+                <li>
+                  <strong>รหัสส่วนลด</strong>: MN20
+                </li>
+                <li>
+                  <strong>ระยะเวลา</strong>: 5 - 18 กันยายน 2567
+                </li>
+                <li>
+                  <strong>รายละเอียด</strong>: ซื้อสินค้าแม็กนั่ม ที่ร่วมรายการครบ 99 บาทขึ้นไป
+                  รับส่วนลด 20 บาท
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <p>หากคุณสนใจโปรโมชั่นอื่น ๆ หรือคำถามเพิ่มเติม สามารถสอบถามได้เลยนะคะ! 😊🛒</p>
+        </div>
+      );
+    case 14:
+      return (
+        <div>
+          <p>
+            เพื่อให้สามารถติดตามสถานะคำสั่งซื้อได้ คุณสามารถเข้าสู่ระบบบัญชีผู้ใช้ในเว็บไซต์บิ๊กซี
+            โดยทำตามขั้นตอนด้านล่าง:
+          </p>
+          <ol className="mb-4 ml-4 list-decimal">
+            <li>คลิกที่ "เข้าสู่ระบบ" ที่มุมขวาบนของหน้าเว็บไซต์</li>
+            <li>ป้อนอีเมลและรหัสผ่านของคุณเพื่อเข้าสู่ระบบ</li>
+            <li>
+              หลังจากเข้าสู่ระบบแล้ว ให้ไปที่เมนู "คำสั่งซื้อของฉัน" หรือ "ประวัติการสั่งซื้อ"
+            </li>
+            <li>ตรวจสอบสถานะคำสั่งซื้อที่คุณต้องการติดตาม</li>
+          </ol>
+          <p>
+            หากคุณประสบปัญหาในการติดตามสถานะคำสั่งซื้อ หรือไม่สามารถเข้าสู่ระบบได้
+            โปรดแจ้งให้ฉันทราบ เพื่อให้ความช่วยเหลือเพิ่มเติมได้ค่ะ! 😊📦
+          </p>
+        </div>
+      );
+    case 15:
+      return (
+        <div>
+          <p>พบกล่องขนมสีแดงดังนี้ค่ะ</p>
+          <ol className="ml-4 list-decimal">
+            {' '}
+            <li>
+              <strong>ยูโร่ พายสอดไส้ครีมเคลือบช็อกโกแลต 156 ก</strong>
+              <ul className="ml-4 list-disc">
+                <li>ราคา 42 บาท</li>
+                <a href="https://www.bigc.co.th/product/euro-choco-pie-156-g.2451">
+                  <img
+                    src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/79/88/8850425003979/8850425003979_1.jpg"
+                    alt="image"
+                    className="w-48 rounded-xl"
+                  />
+                </a>
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
+                  + นำสินค้าเข้าตะกร้า
+                </button>
+              </ul>
+            </li>
+            <br />
+            <li>
+              <strong>กูลิโกะ ป๊อกกี้ บิสกิตแท่งเคลือบช็อกโกแลต</strong>
+              <ul className="ml-4 list-disc">
+                <li>ราคา 21 บาท</li>
+                <a href="https://www.bigc.co.th/product/glico-pocky-biscuit-stick-coated-with-chocolate-flavored-cream-45-g.53967">
+                  <img
+                    src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/07/88/8851019010007/8851019010007_100.jpg"
+                    alt="image"
+                    className="w-48 rounded-xl"
+                  />
+                </a>
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
+                  + นำสินค้าเข้าตะกร้า
+                </button>
+              </ul>
+            </li>
+            <br />
+            <li>
+              <strong>คิทแคท เวเฟอร์ รสช็อกโกแลต 17 กรัม แพ็ค 24</strong>
+              <ul className="ml-4 list-disc">
+                <li>ราคา 240 บาท</li>
+                <a href="https://www.bigc.co.th/product/kitkat-chocolate-17-g-pack-24.216">
+                  <img
+                    src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/19/95/9556001917119/9556001917119_7.jpg"
+                    alt="image"
+                    className="w-48 rounded-xl"
+                  />
+                </a>
+                <button
+                  className="border-1 mt-2 rounded bg-[#93d600] px-2 py-1 duration-300 hover:bg-[#82c500]"
+                  onClick={handleAddToCart}
+                >
+                  + นำสินค้าเข้าตะกร้า
+                </button>
+              </ul>
+            </li>
+            <br />
+          </ol>
+        </div>
+      );
     default:
       return (
         <a
@@ -453,6 +637,8 @@ export const handleSelectBot = (text: string) => {
     return 1;
   } else if (/อยาก\s?(ซื้อ)?\s?อาหาร\s?(แมว)?/.test(text)) {
     return 2;
+  } else if (/แนะนำ\s?(สินค้า)?\s?สำหรับ\s?(จัดงานเลี้ยง)?/.test(text)) {
+    return 3;
   } else if (/โหลด/.test(text)) {
     return 4;
   } else if (/สมัคร\s?(สมาชิก)?/.test(text)) {
@@ -471,6 +657,13 @@ export const handleSelectBot = (text: string) => {
     return 11;
   } else if (/เป็น\s?สมาชิก.*อยู่แล้ว/.test(text)) {
     return 12;
+  } else if (/มี\s?(โปรโมชั่น)?\s?ใด\s?แนะนำ\s?(บ้าง)?/.test(text)) {
+    return 13;
+  } else if (/ติดตาม\s?(สถานะ)?\s?คำสั่งซื้อ\s?(ของฉัน)?/.test(text)) {
+    return 14;
+  } else if (/กล่อง\s?(ขนม)?\s?สี่เหลี่ยม\s?(สีแดง)?(รสช็อกโกแลต)?/.test(text)) {
+    return 15;
   } else {
+    return;
   }
 };

@@ -9,6 +9,7 @@ import homepageAppMenuImage from '../public/homepage-app-menu.jpg';
 import homepageAppImage from '../public/homepage-app.jpg';
 import homepageImage from '../public/homepage.png';
 import { setIsChatOpen } from '@/redux/reducers/globalReducer';
+import RedBox from '@/components/red_box';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function Home() {
 
   return (
     <main className={`flex min-h-screen flex-col overflow-hidden bg-white`}>
+      {/* <iframe className="hidden min-h-screen w-full md:block" src="https://www.bigc.co.th/" /> */}
       <Image
         className="hidden md:block"
         src={homepageImage}
@@ -50,6 +52,8 @@ export default function Home() {
       <SpeechBox />
       <FloatingButton isOpen={isChatOpen} onClick={toggleChatOpen} />
       <ChatPage isOpen={isChatOpen} toggleOpen={toggleChatOpen} />
+
+      <RedBox />
     </main>
   );
 }
