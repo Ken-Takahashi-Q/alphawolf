@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 
 export const chat_hello = `Welcome to BearBuddy AI`; //, your personal shopping assistant 🐻";
 
@@ -420,7 +420,16 @@ export const botMessages = (index: number) => {
         </div>
       );
     default:
-      return <div>ต้องการให้ช่วยอะไรคะ</div>;
+      return (
+        <a
+          className="mb-4 flex flex-col justify-center gap-4"
+          href="https://udify.app/chat/ZqTUuaaWROZTKA9s"
+          target="_blank"
+        >
+          คลิกเพื่อใช้งานเวอร์ชันเต็มเพื่อความรวดเร็ว
+          <Spin />
+        </a>
+      );
   }
 };
 

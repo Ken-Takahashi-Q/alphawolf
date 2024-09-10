@@ -83,7 +83,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ isOpen }) => {
           closable={true}
           onClose={toggleChatClose}
           closeIcon={<DownOutlined />}
-          height={'70%'}
+          height={'90%'}
           footer={[<MessageBox handleSendMessage={handleSendMessage} />]}
           style={{ fontFamily: 'Noto Sans Thai, sans-serif' }}
         >
