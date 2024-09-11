@@ -185,10 +185,27 @@ export const botMessages = (index: number) => {
               </ul>
             </li>
           </ol>
-          <span>
+          <p>
             หากคุณต้องการสินค้าเฉพาะเจาะจงหรือรายละเอียดเพิ่มเติมเกี่ยวกับโปรโมชั่น
             สามารถบอกได้เลยนะคะ! 😊🎈
-          </span>
+          </p>
+
+          <div className="flex flex-col gap-1">
+            <span className="mr-2">คุณอาจสนใจ</span>
+            <a
+              className="w-fit rounded border-2 border-gray-400 bg-gray-200 p-1"
+              href="https://www.bigc.co.th/product/cici-cat-litter-apple-scent-10-l.1119516"
+            >
+              ซีซี่ทรายแมวคอนโด
+            </a>
+
+            <a
+              className="w-fit rounded border-2 border-gray-400 bg-gray-200 p-1"
+              href="https://www.bigc.co.th/product/kaniva-cat-food-indoor-formula-1-3-kg.4872195"
+            >
+              คานิว่าสูตรเลี้ยงในบ้าน
+            </a>
+          </div>
         </div>
       );
     case 3:
