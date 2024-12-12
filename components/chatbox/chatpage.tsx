@@ -14,7 +14,6 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ChatPageContent from './chatPageContent';
 import MessageBox from './message_box';
-import RedBox from '../red_box';
 
 interface ChatPageProps {
   isOpen: boolean;

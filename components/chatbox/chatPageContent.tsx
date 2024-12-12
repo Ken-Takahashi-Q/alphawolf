@@ -7,15 +7,8 @@ import {
   setIsBotResponseNeeded,
 } from '@/redux/reducers/messagesReducer';
 import { RootState } from '@/redux/store/reducers';
-import {
-  hello,
-  chat_hello,
-  promptTutorial,
-  botMessages,
-  userMessages,
-  handleSelectBot,
-} from '@/utils/global';
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { chat_hello, promptTutorial, botMessages, handleSelectBot } from '@/utils/global';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PromptBox from '../promptBox';
 import DeleteChatConfirm from '../warning/deleteChat';
@@ -58,7 +51,7 @@ const ChatPageContent: React.FC = () => {
 
   return (
     <div
-      className={`flex flex-col ${isShowTutorial ? 'items-center justify-center' : 'overflow-y-auto'} overflow-x-hidden md:h-[70vh] md:p-4`}
+      className={`flex flex-col ${isShowTutorial ? 'items-center justify-center' : 'overflow-y-auto'} overflow-x-hidden md:h-[65vh] md:p-4`}
     >
       {isShowTutorial ? (
         <div className="flex flex-col items-center">

@@ -1,7 +1,6 @@
-import { setCart, setIsAddToCart } from '@/redux/reducers/globalReducer';
-import { RootState } from '@/redux/store/reducers';
-import { Button, Spin } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { setIsAddToCart } from '@/redux/reducers/globalReducer';
+import { Spin } from 'antd';
+import { useDispatch } from 'react-redux';
 
 export const chat_hello = `Welcome to BearBuddy AI`; //, your personal shopping assistant 🐻";
 
@@ -28,7 +27,6 @@ export const botMessages = (index: number) => {
 
   const handleAddToCart = () => {
     dispatch(setIsAddToCart(true));
-    // dispatch(setCart(cart + 1));
   };
 
   switch (index) {
@@ -264,7 +262,7 @@ export const botMessages = (index: number) => {
                 <li>ราคา 62 บาท</li>
                 <a href="https://www.bigc.co.th/product/lays-rock-extra-bbq-69-g-x-3-units.6431049">
                   <img
-                    src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/71/88/8850718716371/8850718716371_1-20240801133409-.jpg"
+                    src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/71/88/8850718716371/8850718716371-20241007164038-.jpg"
                     alt="image"
                     className="w-48 rounded-xl"
                   />
@@ -310,7 +308,7 @@ export const botMessages = (index: number) => {
                 </li>
                 <a href="https://www.bigc.co.th/product/festa-mliti-purpose-paper-towels-90-sheets-pack-3.52988">
                   <img
-                    src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/41/88/8850456104041/8850456104041_3.jpg"
+                    src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/41/88/8850456104041/8850456104041_1-20241121165932-.jpg"
                     alt="image"
                     className="w-48 rounded-xl"
                   />
@@ -479,49 +477,47 @@ export const botMessages = (index: number) => {
           <p>🌟 โปรโมชั่นที่น่าสนใจในช่วงนี้! 🎉</p>
           <ol className="mb-4 ml-4 list-decimal">
             <li>
-              ซื้อครบ 129.- ลด 15.-
+              ซื้อครบ 700.- ลด 55.-
               <ul className="ml-4 list-disc">
                 <li>
-                  <strong>รหัสส่วนลด</strong>: TIN15
+                  <strong>รหัสส่วนลด</strong>: DDAY55
                 </li>
                 <li>
-                  <strong>ระยะเวลา</strong>: 29 สิงหาคม - 18 กันยายน 2567
+                  <strong>ระยะเวลา</strong>: 10 - 14 ธันวาคม 2567
                 </li>
                 <li>
-                  <strong>รายละเอียด</strong>: เฉพาะลูกค้าบิ๊กพอยต์ ซื้อสินค้าผลิตภัณฑ์โอวัลติน
-                  ชนิดผง ชนิดยูเอชที ครบ 129 บาทขึ้นไป รับส่วนลด 15 บาท
+                  <strong>รายละเอียด</strong>: ซื้อสินค้าตั้งแต่ 700 บาทขึ้นไป (หลังหักส่วนลด)
+                  *เฉพาะบริการจัดส่งด่วนเท่านั้น
                 </li>
               </ul>
             </li>
 
             <li>
-              ซื้อครบ 89.- ลด 10.-
+              ซื้อครบ 1,800.- ลด 155.-
               <ul className="ml-4 list-disc">
                 <li>
-                  <strong>รหัสส่วนลด</strong>: TU10
+                  <strong>รหัสส่วนลด</strong>: DDAY155
                 </li>
                 <li>
-                  <strong>ระยะเวลา</strong>: 29 สิงหาคม - 18 กันยายน 2567
+                  <strong>ระยะเวลา</strong>: 10 - 14 ธันวาคม 2567
                 </li>
                 <li>
-                  <strong>รายละเอียด</strong>: เฉพาะลูกค้าบิ๊กพอยต์ ซื้อสินค้านอติลุส ครบ 89
-                  บาทขึ้นไป รับส่วนลด 10 บาท
+                  <strong>รายละเอียด</strong>: ซื้อสินค้าตั้งแต่ 1,800 บาทขึ้นไป (หลังหักส่วนลด)
                 </li>
               </ul>
             </li>
 
             <li>
-              ซื้อครบ 99.- ลด 20.-
+              ซื้อครบ 2,800.- ลด 260.-
               <ul className="ml-4 list-disc">
                 <li>
-                  <strong>รหัสส่วนลด</strong>: MN20
+                  <strong>รหัสส่วนลด</strong>: DDAY260
                 </li>
                 <li>
-                  <strong>ระยะเวลา</strong>: 5 - 18 กันยายน 2567
+                  <strong>ระยะเวลา</strong>: 10 - 14 ธันวาคม 2567
                 </li>
                 <li>
-                  <strong>รายละเอียด</strong>: ซื้อสินค้าแม็กนั่ม ที่ร่วมรายการครบ 99 บาทขึ้นไป
-                  รับส่วนลด 20 บาท
+                  <strong>รายละเอียด</strong>: ซื้อสินค้าตั้งแต่ 2,800 บาทขึ้นไป (หลังหักส่วนลด)
                 </li>
               </ul>
             </li>

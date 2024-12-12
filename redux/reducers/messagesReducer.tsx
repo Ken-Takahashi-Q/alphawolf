@@ -1,6 +1,5 @@
-import { botMessages, hello } from '@/utils/global';
+import { hello } from '@/utils/global';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ReactNode } from 'react';
 
 export interface Message {
   text: string;

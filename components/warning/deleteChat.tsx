@@ -37,6 +37,8 @@ const DeleteChatConfirm: React.FC = () => {
         </Flex>
       }
       centered
+      style={{ fontFamily: 'Noto Sans Thai, sans-serif' }}
+      closable={false}
     />
   );
 };
